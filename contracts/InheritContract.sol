@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.28;
+pragma solidity 0.8.27;
 
 /**
  * @title InheritContract
@@ -52,7 +52,7 @@ contract InheritContract {
      * @dev Constructor sets the owner, heir and lastWithdrawalTimeStamp.
      * @param _heir The address of the heir.
      */
-    constructor(address _heir) {
+    constructor(address _heir) payable {
         if (_heir == address(0)) revert HeirCannotBeZeroAddress();
 
         owner = msg.sender;
@@ -73,10 +73,11 @@ contract InheritContract {
      */
     function withdraw(uint256 _amount) external onlyOwner {
         if (_amount > address(this).balance) revert NotEnoughBalance();
+        
+        address ownerCache = owner;
         lastWithdrawalTimeStamp = block.timestamp;
-
-        if (_amount > 0) payable(owner).transfer(_amount);
-        emit Withdrawal(owner, _amount);
+        if (_amount != 0) payable(ownerCache).transfer(_amount);
+        emit Withdrawal(ownerCache, _amount);
     }
 
     /**
