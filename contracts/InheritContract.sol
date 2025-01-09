@@ -95,6 +95,8 @@ contract InheritContract {
      * @param _newHeir The address of the new heir.
      */
     function claimOwnership(address _newHeir) external onlyHeir enoughTimePassed {
+        if (_newHeir == address(0)) revert HeirCannotBeZeroAddress();
+        // maybe gas optimize, use cache for owner and heir   
         emit OwnershipTransferred(owner, heir);
         emit HeirUpdated(heir, _newHeir);
         
