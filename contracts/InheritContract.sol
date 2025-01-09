@@ -74,10 +74,9 @@ contract InheritContract {
     function withdraw(uint256 _amount) external onlyOwner {
         if (_amount > address(this).balance) revert NotEnoughBalance();
         
-        address ownerCache = owner;
         lastWithdrawalTimeStamp = block.timestamp;
-        if (_amount != 0) payable(ownerCache).transfer(_amount);
-        emit Withdrawal(ownerCache, _amount);
+        if (_amount != 0) payable(owner).transfer(_amount);
+        emit Withdrawal(owner, _amount);
     }
 
     /**
@@ -104,16 +103,6 @@ contract InheritContract {
         heir = _newHeir;
         lastWithdrawalTimeStamp = block.timestamp;
     }
-
-    /**
-     * @notice Receive ETH into the contract.
-     */
-    receive() external payable {}
-
-    /**
-     * @notice Fallback function to receive ETH.
-     */
-    fallback() external payable {}
 
     // ************************************* //
     // *              Errors               * //
