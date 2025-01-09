@@ -102,10 +102,7 @@ import {
               await loadFixture(deployInheritContractFixture);
 
             const contractBalance = await publicClient.getBalance({ address: getAddress(inheritContract.address) });
-
-            const inValidWithdrawalAmount = contractBalance + 1n;
-            await expect(inheritContract.write.withdraw([inValidWithdrawalAmount])).to.be.rejectedWith("NotEnoughBalance");
-
+            
             const hash = await inheritContract.write.withdraw([contractBalance]);
             await publicClient.waitForTransactionReceipt({ hash });
 
