@@ -105,6 +105,16 @@ contract InheritContract {
         lastWithdrawalTimeStamp = block.timestamp;
     }
 
+    /**
+     * @notice Receive ETH into the contract.
+     */
+    receive() external payable {}
+
+    /**
+     * @notice Fallback function to receive ETH.
+     */
+    fallback() external payable {}
+
     // ************************************* //
     // *              Errors               * //
     // ************************************* //
