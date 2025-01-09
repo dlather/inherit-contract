@@ -82,6 +82,24 @@ SOLIDITY_COVERAGE=true npx hardhat coverage
 
 ---
 
+## Deployment
+
+Deploy the contract to Holesky testnet using Hardhat Ignition:
+
+```bash
+npx hardhat ignition deploy ./ignition/modules/InheritContract.ts --network holesky
+```
+
+### Contract Verification
+
+Verify the deployed contract on Holesky testnet:
+
+```bash
+npx hardhat ignition verify chain-17000
+```
+
+---
+
 ## Live Checks
 
 ### Solidity Coverage

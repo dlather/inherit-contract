@@ -1,16 +1,18 @@
 import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
 import { parseEther } from "viem";
 
-const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
+const TEST_HEIR_ADDRESS = "0xdD2FD4581271e230360230F9337D5c0430Bf44C0"
+const TEST_BALANCE = "0.000001"
 
 const InheritContract = buildModule("InheritContract", (m) => {
-  const owner = m.getParameter("owner", ZERO_ADDRESS);
-  const heir = m.getParameter("heir", ZERO_ADDRESS);
-  const lastWithdrawalTimeStamp = m.getParameter("lastWithdrawalTimeStamp", 0);
+  const initialHeir = process.env.CONTRACT_INITIAL_HEIR || TEST_HEIR_ADDRESS
+  const inheritContract = m.contract("InheritContract", [initialHeir], {
+    value: parseEther(process.env.CONTRACT_INITIAL_BALANCE || TEST_BALANCE)
+  });
 
-  const inheritContract = m.contract("InheritContract", [heir]);
-
-  return { inheritContract };
+  return {
+    inheritContract,
+  };
 });
 
 export default InheritContract;
