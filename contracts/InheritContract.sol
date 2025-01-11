@@ -85,8 +85,10 @@ contract InheritContract {
      */
     function updateHeir(address _newHeir) external onlyOwner {
         if (_newHeir == address(0)) revert HeirCannotBeZeroAddress();
-        emit HeirUpdated(heir, _newHeir);
+
+        address _oldHeir = heir;
         heir = _newHeir;
+        emit HeirUpdated(_oldHeir, heir);
     }
 
     /**
@@ -95,13 +97,15 @@ contract InheritContract {
      */
     function claimOwnership(address _newHeir) external onlyHeir enoughTimePassed {
         if (_newHeir == address(0)) revert HeirCannotBeZeroAddress();
-        // maybe gas optimize, use cache for owner and heir   
-        emit OwnershipTransferred(owner, heir);
-        emit HeirUpdated(heir, _newHeir);
-        
+
+        address _oldOwner = owner;
+        address _oldHeir = heir;
         owner = heir;
         heir = _newHeir;
         lastWithdrawalTimeStamp = block.timestamp;
+
+        emit OwnershipTransferred(_oldOwner, owner);
+        emit HeirUpdated(_oldHeir, heir);
     }
 
     // ************************************* //
