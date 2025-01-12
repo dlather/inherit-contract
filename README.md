@@ -98,6 +98,11 @@ Verify the deployed contract on Holesky testnet:
 npx hardhat ignition verify chain-17000
 ```
 
+### Deployed Contract
+
+The contract is deployed and verified on Holesky testnet at:
+[0x91a5312dA4001294339B2eb69d1CE442Ce26e82a](https://holesky.etherscan.io/address/0x91a5312dA4001294339B2eb69d1CE442Ce26e82a#code)
+
 ---
 
 ## Live Checks
@@ -110,8 +115,11 @@ Check contract coverage with:
 SOLIDITY_COVERAGE=true npx hardhat coverage
 ```
 
+
+File                  |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
+----------------------|----------|----------|----------|----------|----------------|
+ contracts/           |      100 |      100 |      100 |      100 |                |
+  InheritContract.sol |      100 |      100 |      100 |      100 |                |
+All files             |      100 |      100 |      100 |      100 |                |
+
 ---
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
